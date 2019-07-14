@@ -1,0 +1,58 @@
+<form class="example-container" [formGroup]="form" (ngSubmit)="aceptar()"  #menuRolForm="ngForm">
+
+  <div class="example-container">
+    <mat-form-field class="example-full-width" >
+      <input matInput placeholder="Nombre Menu" required formControlName="nombre"  >
+      
+    </mat-form-field>
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.idRol}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+      </ng-container>        
+     
+      <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.descripcion}} </mat-cell>
+      </ng-container>  
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    
+
+    <mat-form-field>
+      <mat-select placeholder="Rol" [(value)]="rolSeleccionado" >
+        <mat-option *ngFor="let e of roles" [value]="e">
+          {{ e.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  
+    <button mat-raised-button color="primary" type="button" (click)="agregarRol()">Agregar Rol</button>
+    
+    <mat-toolbar *ngFor="let d of rolesSeleccionados; let i=index">
+        {{d.nombre}}
+        <span class="example-spacer"></span>
+        <button mat-raised-button color="warn" type="button" (click)="removerRol(i)">Remover</button>
+     </mat-toolbar>
+   
+    <button mat-raised-button color="primary" type="submit" [disabled]="estadoBotonRegistrar()">Aceptar</button>
+
+
+     
+
+  </div>
+</form>
+
+
+
